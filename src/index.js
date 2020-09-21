@@ -1,7 +1,14 @@
-const customExpress = require('./config/customExpress');
+const express = require('express');
+const bodyParser = require('body-parser');
+const config = require('config');
 
-const app = customExpress();
+const router = require('./routes/providers/index');
 
-app.listen(3333, (req, res) => {
-    console.log("running at port 3333");
+const app = express();
+app.use(bodyParser.json());
+
+app.use('/providers', router);
+
+app.listen(config.get('api.port'), () => {
+    console.log("running at port 3000");
 });

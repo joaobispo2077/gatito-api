@@ -4,7 +4,7 @@
     "description": "API do Petshop Gatito que provém comunicação entre múltiplos Clients e utiliza múltiplas formas de comunicação (JSON, xml e etc..) e segue alguns padrões REST.",
     "main": "index.js",
     "scripts": {
-        "start": "node ./src/index.js",
+        "start": "nodemon ./src/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -20,8 +20,13 @@
     "homepage": "https://github.com/joaobispo2077/gatito-api#readme",
     "dependencies": {
         "body-parser": "^1.19.0",
+        "config": "^3.3.1",
         "express": "^4.17.1",
         "mysql": "^2.18.1",
+        "mysql2": "^2.2.5",
         "sequelize": "^6.3.5"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.4"
     }
 }
