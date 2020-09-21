@@ -1,0 +1,27 @@
+{
+    "name": "gatito-api",
+    "version": "1.0.0",
+    "description": "API do Petshop Gatito que provém comunicação entre múltiplos Clients e utiliza múltiplas formas de comunicação (JSON, xml e etc..) e segue alguns padrões REST.",
+    "main": "index.js",
+    "scripts": {
+        "start": "node ./src/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/joaobispo2077/gatito-api.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/joaobispo2077/gatito-api/issues"
+    },
+    "homepage": "https://github.com/joaobispo2077/gatito-api#readme",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
+        "mysql": "^2.18.1",
+        "sequelize": "^6.3.5"
+    }
+}
