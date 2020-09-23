@@ -25,7 +25,7 @@ router.get('/:id', async(req, res, next) => {
         await provider.findById();
         res.status(200); // .json(provider);
         const serializeProvider = new SerializerProvider(
-            res.getHeader('Content-Type')
+            res.getHeader('Content-Type'), ['email', 'dataCriacao', 'dataAtualizacao', 'versao']
         );
 
         res.send(serializeProvider.serialize(provider));
@@ -42,13 +42,14 @@ router.post('/', async(req, res, next) => {
         const provider = new Provider(data);
         const createdProvider = await provider.create();
 
-        res.status(201); //.json(createdProvider);
+
 
         const serializeProvider = new SerializerProvider(
             res.getHeader('Content-Type')
         );
 
-        res.send(serializeProvider.serialize(createdProvider));
+        res.status(201) //.json(createdProvider);
+            .send(serializeProvider.serialize(provider));
 
     } catch (err) {
         next(err);

@@ -7,7 +7,8 @@ const NotFound = require('./errors/NotFound');
 const FieldInvalid = require('./errors/FieldInvalid');
 const NotData = require('./errors/NotData');
 const NotSupportedValue = require('./errors/NotSupportedValue');
-const Serializer = require('./Serializer');
+const SerializerError = require('./Serializer').SerializerError;
+
 const formats = require('./Serializer').formats;
 
 const app = express();
@@ -50,10 +51,15 @@ app.use((err, req, res, next) => {
         status = 406;
     }
 
-    res.status(status).send({
-        mensagem: err.message,
-        id: err.idError
-    });
+    const serializerError = new SerializerError(
+        res.getHeader('Content-Type')
+    );
+
+    res.status(status).send(
+        serializerError.serialize({
+            mensagem: err.message,
+            id: err.idError
+        }));
 });
 
 app.listen(config.get('api.port'), () => {
