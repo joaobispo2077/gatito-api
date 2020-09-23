@@ -59,6 +59,15 @@ class Provider {
         await TableProvider.update(this.id, datasToUpdate);
     }
 
+    async delete() {
+        // const provider = 
+        await TableProvider.searchById(this.id);
+
+        return TableProvider.remove(this.id);
+
+        // return provider;
+    }
+
 }
 
 module.exports = Provider;
