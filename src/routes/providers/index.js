@@ -21,10 +21,15 @@ router.get('/:id', async(req, res) => {
 });
 
 router.post('/', async(req, res) => {
-    const data = req.body;
-    const provider = new Provider(data);
-    const createdProvider = await provider.create();
-    res.status(201).json(createdProvider);
+    try {
+        const data = req.body;
+        const provider = new Provider(data);
+        const createdProvider = await provider.create();
+        res.status(201).json(createdProvider);
+
+    } catch (err) {
+        res.status(400).send({ mensagem: err.message });
+    }
 });
 
 router.patch('/:id', async(req, res) => {

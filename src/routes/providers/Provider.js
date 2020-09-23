@@ -12,6 +12,7 @@ class Provider {
     }
 
     async create() {
+        this.validate();
         const provider = await TableProvider.insert({
             empresa: this.empresa,
             email: this.email,
@@ -60,12 +61,21 @@ class Provider {
     }
 
     async delete() {
-        // const provider = 
         await TableProvider.searchById(this.id);
 
         return TableProvider.remove(this.id);
 
-        // return provider;
+    }
+
+    validate() {
+        const columns = ['empresa', 'email', 'categoria'];
+
+        columns.forEach(column => {
+            const value = this[column];
+            if (typeof value !== 'string' || value.length === 0) {
+                throw new Error(`O campo ${column} está inválido`);
+            }
+        })
     }
 
 }
