@@ -1,14 +1,19 @@
 const router = require('express').Router();
 
 const TableProvider = require('./tableProvider');
-
-
 const Provider = require('./Provider');
+const SerializerProvider = require('../../Serializer').SerializerProvider;
 
 router.get('/', async(req, res) => {
     const providers = await TableProvider.listAll();
 
-    res.status(200).json(providers);
+
+    const serializeProvider = new SerializerProvider(
+        res.getHeader('Content-Type')
+    );
+
+    res.status(200); //.json(providers);
+    res.send(serializeProvider.serialize(providers));
 });
 
 router.get('/:id', async(req, res, next) => {
@@ -18,7 +23,13 @@ router.get('/:id', async(req, res, next) => {
         const provider = new Provider({ id: id });
 
         await provider.findById();
-        res.status(200).json(provider);
+        res.status(200); // .json(provider);
+        const serializeProvider = new SerializerProvider(
+            res.getHeader('Content-Type')
+        );
+
+        res.send(serializeProvider.serialize(provider));
+
     } catch (err) {
         next(err);
     }
@@ -31,7 +42,14 @@ router.post('/', async(req, res, next) => {
         const provider = new Provider(data);
         const createdProvider = await provider.create();
 
-        res.status(201).json(createdProvider);
+        res.status(201); //.json(createdProvider);
+
+        const serializeProvider = new SerializerProvider(
+            res.getHeader('Content-Type')
+        );
+
+        res.send(serializeProvider.serialize(createdProvider));
+
     } catch (err) {
         next(err);
     }
