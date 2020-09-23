@@ -1,5 +1,5 @@
 const Model = require('./modelTableProviders');
-const NotFound = require('../../errors/notFound');
+const NotFound = require('../../errors/NotFound');
 
 module.exports = {
     listAll() {
