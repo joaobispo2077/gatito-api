@@ -1,3 +1,5 @@
+const jsontoxml = require('jsontoxml');
+
 const NotSupportedValue = require('./errors/NotSupportedValue');
 
 class Serializer {
@@ -5,9 +7,30 @@ class Serializer {
         return JSON.stringify(data);
     }
 
+    xml(data) {
+        let tag = this.tagSingular;
+
+        if (Array.isArray(data)) {
+            tag = this.tagPlural;
+            data = data.map((item) => {
+                return {
+                    [this.tagSingular]: item
+                }
+            })
+        }
+        return jsontoxml({
+            [tag]: data });
+    }
+
     serialize(data) {
+        data = this.filter(data);
         if (this.contentType === 'application/json') {
-            return this.json(this.filter(data));
+            return this.json(data);
+        }
+
+        if (this.contentType === 'application/xml') {
+            return this.xml(data);
+
         }
         throw new NotSupportedValue(this.contentType);
     }
@@ -46,6 +69,8 @@ class SerializerProvider extends Serializer {
             'empresa',
             'categoria'
         ].concat(extraFields || []);
+        this.tagSingular = 'fornecedor';
+        this.tagPlural = 'fornecedores';
     }
 }
 
@@ -57,6 +82,8 @@ class SerializerError extends Serializer {
             'id',
             'mensagem'
         ].concat(extraFields || []);
+        this.tagSingular = 'erro';
+        this.tagPlural = "erros";
     }
 }
 
@@ -64,5 +91,5 @@ module.exports = {
     Serializer: Serializer,
     SerializerProvider: SerializerProvider,
     SerializerError: SerializerError,
-    formats: ['application/json']
+    formats: ['application/json', 'application/xml']
 };
