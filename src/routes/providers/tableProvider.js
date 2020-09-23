@@ -1,4 +1,5 @@
 const Model = require('./modelTableProviders');
+const NotFound = require('../../errors/notFound');
 
 module.exports = {
     listAll() {
@@ -14,7 +15,7 @@ module.exports = {
         const searched = await Model.findOne({ where: { id: id } });
 
         if (!searched) {
-            throw new Error('O fornecedor não foi encontrado');
+            throw new NotFound();
         }
 
         return searched;

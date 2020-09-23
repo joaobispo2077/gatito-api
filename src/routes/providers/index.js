@@ -1,5 +1,8 @@
 const router = require('express').Router();
+
 const TableProvider = require('./tableProvider');
+
+
 const Provider = require('./Provider');
 
 router.get('/', async(req, res) => {
@@ -15,7 +18,7 @@ router.get('/:id', async(req, res) => {
         await provider.findById();
         res.status(200).json(provider);
     } catch (err) {
-        res.status(400).send({ mensagem: err.message });
+        res.status(404).send({ mensagem: err.message });
     }
 
 });
@@ -32,16 +35,16 @@ router.post('/', async(req, res) => {
     }
 });
 
-router.patch('/:id', async(req, res) => {
+router.patch('/:id', async(req, res, next) => {
     try {
         const id = req.params.id;
         const data = req.body;
         const datas = Object.assign({}, data, { id: id });
         const provider = new Provider(datas);
         await provider.update();
-        res.end();
+        res.status(204).end();
     } catch (err) {
-        res.status(400).send({ mensagem: err.message });
+        next(err);
     }
 });
 
@@ -53,7 +56,7 @@ router.delete('/:id', async(req, res) => {
         res.status(200).json({ id: id });
 
     } catch (err) {
-        res.send({ mensagem: err.message });
+        res.status(404).send({ mensagem: err.message });
     }
 });
 
