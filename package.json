@@ -4,7 +4,8 @@
     "description": "API do Petshop Gatito que provém comunicação entre múltiplos Clients e utiliza múltiplas formas de comunicação (JSON, xml e etc..) e segue alguns padrões REST.",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon ./src/index.js",
+        "start": "node ./src/index.js",
+        "dev": "nodemon ./src/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -21,6 +22,7 @@
     "dependencies": {
         "body-parser": "^1.19.0",
         "config": "^3.3.1",
+        "cors": "^2.8.5",
         "express": "^4.17.1",
         "jsontoxml": "^1.0.1",
         "mysql": "^2.18.1",

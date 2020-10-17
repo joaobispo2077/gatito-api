@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('config');
+const cors = require('cors');
 
 const router = require('./routes/providers/index');
 const NotFound = require('./errors/NotFound');
@@ -12,7 +13,7 @@ const SerializerError = require('./Serializer').SerializerError;
 const formats = require('./Serializer').formats;
 
 const app = express();
-
+app.use(cors());
 app.use(bodyParser.json());
 
 //next => próximo middlware a ser executado ou as próximas rotas
