@@ -8,6 +8,20 @@ router.get('/', async(req, res) => {
   return res.json(products);
 });
 
+router.get('/:idProduct', async(req, res, next) => {
+  try {
+    const productParams = {
+      id: parseInt(req.params.idProduct),
+      provider: req.provider.id
+    }
+    const product = new Product(productParams)
+    await product.getById();
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post('/', async(req, res) => {
   try {
 

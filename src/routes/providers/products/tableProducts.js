@@ -5,6 +5,13 @@ module.exports = {
       where: { provider: providerID }
     });
   },
+
+  async findOneById(idProduct, idProvider) {
+    return await Products.findOne({
+      where: { id: idProduct, provider: idProvider },
+      raw: true
+    })
+  },
   async insert(product) {
     return await Products.create(product);
   },

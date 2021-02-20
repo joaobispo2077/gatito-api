@@ -23,6 +23,17 @@ class Product {
     }
   }
 
+  async getById() {
+    const product = await productDAO.findOneById(this.id, this.provider);
+
+    this.title = product.title;
+    this.price = product.price;
+    this.stock = product.stock;
+    this.dataCriacao = product.dataCriacao;
+    this.dataAtualizacao = product.dataAtualizacao;
+    this.versao = product.versao;
+  }
+
   async create() {
     await this.validate();
     const createdProduct = await productDAO.insert({
