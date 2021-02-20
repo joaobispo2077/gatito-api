@@ -76,6 +76,10 @@ class Product {
   async remove() {
     return await productDAO.delete(this.id, this.provider);
   }
+
+  async subtractStock() {
+    return await productDAO.subtract(this.id, this.provider, "stock", this.stock);
+  }
 }
 
 module.exports = Product;

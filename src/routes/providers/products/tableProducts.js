@@ -1,4 +1,5 @@
 const Products = require('./modelTableProduct');
+const connection = require('../../../database/connection');
 module.exports = {
   async listAll(providerID) {
     return await Products.findAll({
@@ -34,4 +35,15 @@ module.exports = {
       }
     });
   },
+
+  async subtract(idProduct, idProvider, field, quantity) {
+    return connection.transaction(async(transact) => {
+      const product = await Products.findOne({ where: { id: idProduct, provider: idProvider } });
+
+      product[field] = quantity;
+
+      await product.save();
+      return product;
+    })
+  }
 }

@@ -78,4 +78,18 @@ router.delete('/:idProduct', async(req, res) => {
   res.status(204).end();
 });
 
+router.post('/:idProduct/subtract-stock', async(req, res, next) => {
+  try {
+    const quantity = req.body.quantity
+    const product = new Product({ id: req.params.idProduct, provider: req.provider.id });
+    await product.getById();
+    if (((product.stock - quantity) < 0)) throw new Error('HOJE não é possível comprar esse produto nessa quantidade, diminua a quantidade');
+    product.stock = product.stock - quantity;
+    await product.subtractStock();
+    res.status(204).end();
+  } catch (err) {
+    next(err);
+  }
+})
+
 module.exports = router;
