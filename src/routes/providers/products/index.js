@@ -52,6 +52,19 @@ router.post('/', async(req, res) => {
   }
 });
 
+router.patch('/:idProduct', async(req, res, next) => {
+  try {
+    const productParams = Object.assign({},
+      req.body, { id: req.params.idProduct, provider: req.provider.id });
+
+    const product = new Product(productParams);
+    await product.update();
+    res.status(204).end();
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.delete('/:idProduct', async(req, res) => {
   const productParams = {
     id: parseInt(req.params.idProduct),

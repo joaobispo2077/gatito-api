@@ -50,6 +50,29 @@ class Product {
     this.versao = createdProduct.versao;
   }
 
+  async update() {
+
+    const dataUpdate = {}
+
+    if (typeof this.price === 'number' && this.price > 0) {
+      dataUpdate.price = this.price;
+    }
+
+    if (typeof this.title === 'string' && this.title.length !== 0) {
+      dataUpdate.title = this.title;
+    }
+
+    if (typeof this.stock === 'number') {
+      dataUpdate.stock = this.stock;
+    }
+
+    if (Object.keys(dataUpdate).length === 0) {
+      throw new Error('Não foram fornecidos dados para atualizar o produto');
+    }
+
+    return await productDAO.update({ id: this.id, provider: this.provider }, dataUpdate);
+  }
+
   async remove() {
     return await productDAO.delete(this.id, this.provider);
   }

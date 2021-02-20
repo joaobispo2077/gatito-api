@@ -17,6 +17,14 @@ module.exports = {
   async insert(product) {
     return await Products.create(product);
   },
+  async update(product, updateData) {
+    return await Products.update(updateData, {
+      where: {
+        id: product.id,
+        provider: product.provider,
+      }
+    })
+  },
 
   async delete(idProduct, idProvider) {
     return await Products.destroy({
