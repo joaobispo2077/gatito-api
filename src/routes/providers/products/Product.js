@@ -1,5 +1,6 @@
 const FieldInvalid = require('../../../errors/FieldInvalid');
 const productDAO = require('./tableProducts');
+const NotData = require('../../../errors/NotData');
 
 class Product {
   constructor({ provider, id, title, price, stock, dataCriacao, dataAtualizacao, versao }) {
@@ -67,7 +68,7 @@ class Product {
     }
 
     if (Object.keys(dataUpdate).length === 0) {
-      throw new Error('Não foram fornecidos dados para atualizar o produto');
+      throw new NotData('Não foram fornecidos dados para atualizar o produto');
     }
 
     return await productDAO.update({ id: this.id, provider: this.provider }, dataUpdate);
