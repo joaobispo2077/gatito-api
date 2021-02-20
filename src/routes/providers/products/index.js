@@ -3,8 +3,8 @@ const router = require('express').Router({ mergeParams: true });
 const Product = require('./Product');
 const productDAO = require('./tableProducts');
 
-router.get('/', (req, res) => {
-  const products = productDAO.listAll(req.params.id);
+router.get('/', async(req, res) => {
+  const products = await productDAO.listAll(parseInt(req.params.id));
   return res.json(products);
 });
 
@@ -18,4 +18,16 @@ router.post('/', async(req, res) => {
 
   res.status(201).json(product);
 });
+
+router.delete('/:idProduct', async(req, res) => {
+  const productParams = {
+    id: parseInt(req.params.idProduct),
+    provider: parseInt(req.params.idProduct),
+  };
+
+  const product = new Product(productParams);
+
+  await product.remove();
+});
+
 module.exports = router;

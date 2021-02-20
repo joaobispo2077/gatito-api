@@ -25,6 +25,10 @@ class Product {
     this.dataAtualizacao = createdProduct.dataAtualizacao;
     this.versao = createdProduct.versao;
   }
+
+  async remove() {
+    return await productDAO.delete(this.id, this.provider);
+  }
 }
 
 module.exports = Product;

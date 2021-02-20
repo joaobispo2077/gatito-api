@@ -7,5 +7,14 @@ module.exports = {
   },
   async insert(product) {
     return await Products.create(product);
-  }
+  },
+
+  async delete(idProduct, idProvider) {
+    return await Products.destroy({
+      where: {
+        id: idProduct,
+        provider: idProvider,
+      }
+    });
+  },
 }
