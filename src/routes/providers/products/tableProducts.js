@@ -2,14 +2,16 @@ const Products = require('./modelTableProduct');
 module.exports = {
   async listAll(providerID) {
     return await Products.findAll({
-      where: { provider: providerID }
+      where: { provider: providerID },
+      raw: true
     });
   },
 
   async findOneById(idProduct, idProvider) {
     return await Products.findOne({
       where: { id: idProduct, provider: idProvider },
-      raw: true
+      raw: true,
+
     })
   },
   async insert(product) {

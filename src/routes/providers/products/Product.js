@@ -14,6 +14,7 @@ class Product {
   }
 
   async validate() {
+    console.log("price", this.price)
     if (typeof this.price !== 'number' || this.price.length === 0) {
       throw new FieldInvalid('price');
     }
