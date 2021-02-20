@@ -1,3 +1,4 @@
+const FieldInvalid = require('../../../errors/FieldInvalid');
 const productDAO = require('./tableProducts');
 
 class Product {
@@ -12,7 +13,35 @@ class Product {
     this.versao = versao;
   }
 
+  async validate() {
+    const fieldsType = [{
+        shouldBe: 'string',
+        columns: ['title']
+      },
+      {
+        shouldBe: 'number',
+        columns: ['price']
+      },
+      {
+        shouldBe: 'integer',
+        columns: ['provider']
+      },
+
+    ];
+
+    fieldsType.forEach(fieldType => {
+      fieldType.columns.forEach(column => {
+        const value = this[column];
+        if (typeof value !== fieldType.shouldBe || value.length === 0) {
+          throw new FieldInvalid(column);
+        }
+      });
+
+    })
+  }
+
   async create() {
+    await this.validate();
     const createdProduct = await productDAO.insert({
       title: this.title,
       provider: this.provider,
