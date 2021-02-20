@@ -22,12 +22,14 @@ router.post('/', async(req, res) => {
 router.delete('/:idProduct', async(req, res) => {
   const productParams = {
     id: parseInt(req.params.idProduct),
-    provider: parseInt(req.params.idProduct),
+    provider: parseInt(req.params.id),
   };
 
   const product = new Product(productParams);
 
   await product.remove();
+
+  res.status(204).end();
 });
 
 module.exports = router;
