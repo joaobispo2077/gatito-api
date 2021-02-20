@@ -14,30 +14,13 @@ class Product {
   }
 
   async validate() {
-    const fieldsType = [{
-        shouldBe: 'string',
-        columns: ['title']
-      },
-      {
-        shouldBe: 'number',
-        columns: ['price']
-      },
-      {
-        shouldBe: 'integer',
-        columns: ['provider']
-      },
+    if (typeof this.price !== 'number' || this.price.length === 0) {
+      throw new FieldInvalid('price');
+    }
 
-    ];
-
-    fieldsType.forEach(fieldType => {
-      fieldType.columns.forEach(column => {
-        const value = this[column];
-        if (typeof value !== fieldType.shouldBe || value.length === 0) {
-          throw new FieldInvalid(column);
-        }
-      });
-
-    })
+    if (typeof this.title !== 'string' || this.title.length === 0) {
+      throw new FieldInvalid('title');
+    }
   }
 
   async create() {
