@@ -4,5 +4,8 @@ module.exports = {
     return await Products.findAll({
       where: { provider: providerID }
     });
+  },
+  async insert(product) {
+    return await Products.create(product);
   }
 }

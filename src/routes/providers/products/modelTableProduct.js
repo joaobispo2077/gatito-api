@@ -28,7 +28,10 @@ const columns = {
 const options = {
   freezeTableName: true,
   tableName: 'product',
-  timestamps: true
+  timestamps: true,
+  createdAt: 'dataCriacao',
+  updatedAt: 'dataAtualizacao',
+  version: 'versao'
 }
 
 module.exports = connection.define('product', columns, options);
