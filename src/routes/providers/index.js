@@ -4,6 +4,14 @@ const TableProvider = require('./tableProvider');
 const Provider = require('./Provider');
 const SerializerProvider = require('../../Serializer').SerializerProvider;
 
+router.options('/', (req, res) => {
+  res
+    .set('Access-Control-Allow-Headers', '*')
+    .set('Access-Control-Allow-Methods', '*')
+    .status(204)
+    .end();
+})
+
 router.get('/', async(req, res) => {
   const providers = await TableProvider.listAll();
 

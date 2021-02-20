@@ -1,5 +1,6 @@
 const Products = require('./modelTableProduct');
 const connection = require('../../../database/connection');
+const NotFound = require('../../../errors/NotFound');
 module.exports = {
   async listAll(providerID) {
     return await Products.findAll({
@@ -9,11 +10,16 @@ module.exports = {
   },
 
   async findOneById(idProduct, idProvider) {
-    return await Products.findOne({
+    const foundProduct = await Products.findOne({
       where: { id: idProduct, provider: idProvider },
       raw: true,
+    });
 
-    })
+    if (!foundProduct) {
+      throw new NotFound();
+    }
+
+    return foundProduct;
   },
   async insert(product) {
     return await Products.create(product);
