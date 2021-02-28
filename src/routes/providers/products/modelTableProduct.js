@@ -1,14 +1,14 @@
-const Sequelize = require('sequelize');
-const connection = require('../../../database/connection');
+const Sequelize = require('sequelize')
+const connection = require('../../../database/connection')
 
 const columns = {
   title: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
   price: {
     type: Sequelize.DOUBLE,
-    allowNull: false,
+    allowNull: false
   },
   stock: {
     type: Sequelize.INTEGER,
@@ -34,4 +34,4 @@ const options = {
   version: 'versao'
 }
 
-module.exports = connection.define('product', columns, options);
+module.exports = connection.define('product', columns, options)

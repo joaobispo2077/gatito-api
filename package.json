@@ -1,35 +1,42 @@
 {
-    "name": "gatito-api",
-    "version": "1.0.0",
-    "description": "API do Petshop Gatito que provém comunicação entre múltiplos Clients e utiliza múltiplas formas de comunicação (JSON, xml e etc..) e segue alguns padrões REST.",
-    "main": "index.js",
-    "scripts": {
-        "start": "node ./src/index.js",
-        "dev": "nodemon ./src/index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/joaobispo2077/gatito-api.git"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/joaobispo2077/gatito-api/issues"
-    },
-    "homepage": "https://github.com/joaobispo2077/gatito-api#readme",
-    "dependencies": {
-        "body-parser": "^1.19.0",
-        "config": "^3.3.1",
-        "cors": "^2.8.5",
-        "express": "^4.17.1",
-        "jsontoxml": "^1.0.1",
-        "mysql": "^2.18.1",
-        "mysql2": "^2.2.5",
-        "sequelize": "^6.3.5"
-    },
-    "devDependencies": {
-        "nodemon": "^2.0.4"
-    }
+  "name": "gatito-api",
+  "version": "1.0.0",
+  "description": "API do Petshop Gatito que provém comunicação entre múltiplos Clients e utiliza múltiplas formas de comunicação (JSON, xml e etc..) e segue alguns padrões REST.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaobispo2077/gatito-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joaobispo2077/gatito-api/issues"
+  },
+  "homepage": "https://github.com/joaobispo2077/gatito-api#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "config": "^3.3.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsontoxml": "^1.0.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "eslint": "^7.21.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "nodemon": "^2.0.4"
+  }
 }
