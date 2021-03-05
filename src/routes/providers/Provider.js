@@ -4,7 +4,7 @@ const FieldInvalid = require('../../errors/FieldInvalid')
 const NotData = require('../../errors/NotData')
 
 class Provider {
-  constructor({ id, empresa, email, categoria, dataCriacao, dataAtualizacao, versao }) {
+  constructor ({ id, empresa, email, categoria, dataCriacao, dataAtualizacao, versao }) {
     this.id = id
     this.empresa = empresa
     this.email = email
@@ -14,7 +14,7 @@ class Provider {
     this.versao = versao
   }
 
-  async create() {
+  async create () {
     this.validate()
     const provider = await TableProvider.insert({
       empresa: this.empresa,
@@ -30,7 +30,7 @@ class Provider {
     return provider
   }
 
-  async findById() {
+  async findById () {
     const provider = await TableProvider.searchById(this.id)
 
     this.id = provider.id
@@ -44,7 +44,7 @@ class Provider {
     return provider
   }
 
-  async update() {
+  async update () {
     await TableProvider.searchById(this.id)
     const columns = ['empresa', 'email', 'categoria']
     const datasToUpdate = {}
@@ -62,13 +62,13 @@ class Provider {
     await TableProvider.update(this.id, datasToUpdate)
   }
 
-  async delete() {
+  async delete () {
     await TableProvider.searchById(this.id)
 
     return TableProvider.remove(this.id)
   }
 
-  validate() {
+  validate () {
     const columns = ['empresa', 'email', 'categoria']
 
     columns.forEach(column => {
